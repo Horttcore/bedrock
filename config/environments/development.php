@@ -24,7 +24,6 @@ $handler->setEditor(env('EDITOR'));
 $whoops = new \Whoops\Run;
 $whoops->prependHandler($handler);
 $whoops->register();
-loremIpsum();
 
 // Enable plugin and theme updates and installation from the admin
 Config::define('DISALLOW_FILE_MODS', false);
