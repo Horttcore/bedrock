@@ -1,3 +1,23 @@
+### Head
+
+* Use Bedrock Autoloader package ([#519](https://github.com/roots/bedrock/pull/519))
+
+### 1.13.5: 2020-05-11
+
+* chore(deps): Bump roots/wordpress from 5.4 to 5.4.1 ([#517](https://github.com/roots/bedrock/pull/517))
+
+
+### 1.13.4: 2020-04-24
+
+* fix(mu-plugins): Bump bedrock-autoloader version ([#512](https://github.com/roots/bedrock/pull/512))
+* fix(mu-plugins): A more sane fix for #510 ([#512](https://github.com/roots/bedrock/pull/512))
+
+### 1.13.3: 2020-04-24
+
+* enhance(ci): Add CircleCI workflow for PHP 7.4 ([#510](https://github.com/roots/bedrock/pull/511))
+* fix(mu-plugins): Fix invalid array access notice on 7.4 ([#510](https://github.com/roots/bedrock/pull/510))
+* enhance(composer): Add `only` option to wpackagist.org repository ([#508](https://github.com/roots/bedrock/pull/508))
+
 ### 1.13.2: 2020-04-01
 
 * chore(deps): Bump WordPress to 5.4 ([#502](https://github.com/roots/bedrock/pull/502))
