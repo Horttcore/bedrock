@@ -1,0 +1,64 @@
+services:
+  # FrankenPHP - Modern PHP application server with built-in web server
+  web:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: bedrock_web
+    restart: unless-stopped
+    ports:
+      - "9000:80"
+      - "9001:443"
+    volumes:
+      - .:/app
+    working_dir: /app
+    environment:
+      - SERVER_NAME=:80
+      - WP_CLI_ALLOW_ROOT=1
+    depends_on:
+      - mysql
+      - valkey
+    networks:
+      - bedrock-network
+
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: bedrock_mysql
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: bedrock
+      MYSQL_USER: bedrock
+      MYSQL_PASSWORD: bedrock
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - bedrock-network
+
+
+  # Valkey for caching (Redis-compatible)
+  valkey:
+    image: valkey/valkey:8.0-alpine
+    container_name: bedrock_valkey
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - valkey_data:/data
+    command: valkey-server --appendonly yes
+    networks:
+      - bedrock-network
+
+volumes:
+  mysql_data:
+    driver: local
+  valkey_data:
+    driver: local
+
+networks:
+  bedrock-network:
+    driver: bridge
