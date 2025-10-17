@@ -18,12 +18,11 @@ Config::define('DISALLOW_INDEXING', true);
 
 ini_set('display_errors', '1');
 
-$handler = new \Whoops\Handler\PrettyPageHandler;
-$handler->setEditor(env('EDITOR'));
-
-$whoops = new \Whoops\Run;
-$whoops->prependHandler($handler);
-$whoops->register();
+// Register error handler
+if (class_exists('\Spatie\Ignition\Ignition')) {
+    \Spatie\Ignition\Ignition::make()->register();
+}
 
 // Enable plugin and theme updates and installation from the admin
 Config::define('DISALLOW_FILE_MODS', false);
+
