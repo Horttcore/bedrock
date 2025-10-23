@@ -1,11 +1,23 @@
 {
-  "name": "Bedrock Development",
-  "dockerComposeFile": ["docker-compose.yml"],
-  "service": "app",
-  "workspaceFolder": "/roots/app",
-  "forwardPorts": [8080],
-  "remoteEnv": {
-    "WP_ENV": "development"
+  "name": "Bedrock WordPress",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "web",
+  "workspaceFolder": "/app",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "bmewburn.vscode-intelephense-client",
+        "esbenp.prettier-vscode"
+      ],
+      "settings": {
+        "php.validate.executablePath": "/usr/local/bin/php"
+      }
+    }
   },
-  "postCreateCommand": "cp -n /roots/app/.devcontainer/.env.example /roots/app/.env"
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {}
+  },
+  "postCreateCommand": "composer install --no-interaction",
+  "remoteUser": "root",
+  "forwardPorts": [9000, 9001, 3306, 6379]
 }

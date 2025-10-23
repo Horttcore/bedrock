@@ -1,45 +1,65 @@
 services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-      - ..:/roots/app
-      - ./config/php.ini:/usr/local/etc/php/conf.d/bedrock.ini
-    networks:
-      - bedrock
-    depends_on:
-      database:
-        condition: service_healthy
-    environment:
-      WP_CLI_ALLOW_ROOT: 1
+    # FrankenPHP - Modern PHP application server with built-in web server
+    web:
+        build:
+            context: ..
+            dockerfile: .devcontainer/Dockerfile
+        container_name: bedrock_web
+        restart: unless-stopped
+        env_file:
+            - .env
+        ports:
+            - "${PUBLIC_HTTP_PORT:-9000}:80"
+            - "${PUBLIC_HTTPS_PORT:-9001}:443"
+        volumes:
+            - ..:/app
+        working_dir: /app
+        environment:
+            - SERVER_NAME=:80
+            - WP_CLI_ALLOW_ROOT=1
+        depends_on:
+            - mysql
+            - valkey
+        networks:
+            - bedrock-network
 
-  web:
-    image: nginx:alpine
-    ports:
-      - '8080:80'
-    volumes:
-      - ..:/roots/app:ro
-      - ./config/nginx.conf:/etc/nginx/conf.d/default.conf:ro
-    depends_on:
-      - app
-    networks:
-      - bedrock
+    # MySQL Database
+    mysql:
+        image: mysql:8.0
+        container_name: bedrock_mysql
+        restart: unless-stopped
+        ports:
+            - "${PUBLIC_MYSQL_PORT:-3306}:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: bedrock
+            MYSQL_USER: bedrock
+            MYSQL_PASSWORD: bedrock
+        volumes:
+            - mysql_data:/var/lib/mysql
+            - ../docker/mysql/init.sql:/docker-entrypoint-initdb.d
+        networks:
+            - bedrock-network
 
-  database:
-    image: mariadb:11
-    environment:
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: wordpress
-      MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: password
-    networks:
-      - bedrock
-    healthcheck:
-      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
-      timeout: 20s
-      retries: 10
+    # Valkey for caching (Redis-compatible)
+    valkey:
+        image: valkey/valkey:8.0-alpine
+        container_name: bedrock_valkey
+        restart: unless-stopped
+        ports:
+            - "${PUBLIC_VALKEY_PORT:-6379}:6379"
+        volumes:
+            - valkey_data:/data
+        command: valkey-server --appendonly yes
+        networks:
+            - bedrock-network
+
+volumes:
+    mysql_data:
+        driver: local
+    valkey_data:
+        driver: local
 
 networks:
-  bedrock:
-    driver: bridge
+    bedrock-network:
+        driver: bridge
