@@ -65,6 +65,9 @@
     "wordpress-install-dir": "web/wp"
   },
   "scripts": {
+    "docker:up": "docker-compose -f .devcontainer/docker-compose.yml --project-name bedrock-dev up -d --build",
+    "docker:down": "docker-compose -f .devcontainer/docker-compose.yml --project-name bedrock-dev down",
+    "docker:drop": "docker-compose -f .devcontainer/docker-compose.yml --project-name bedrock-dev down -v",
     "lint": "pint --test",
     "lint:fix": "pint"
   }

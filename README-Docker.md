@@ -32,7 +32,7 @@ This Docker setup provides a complete development environment for WordPress Bedr
    ```
 
 5. **Access your site**
-   - Website: http://localhost:9000 (HTTP) or https://localhost:9001 (HTTPS)
+   - Website: http://localhost:8080 (HTTP) or https://localhost:8888 (HTTPS)
    - Database: localhost:3306 (user: bedrock, password: bedrock)
    - Cache: localhost:6379
 

@@ -9,8 +9,8 @@ services:
         env_file:
             - .env
         ports:
-            - "${PUBLIC_HTTP_PORT:-9000}:80"
-            - "${PUBLIC_HTTPS_PORT:-9001}:443"
+            - "${PUBLIC_HTTP_PORT:-8080}:80"
+            - "${PUBLIC_HTTPS_PORT:-8888}:443"
         volumes:
             - ..:/app
         working_dir: /app

@@ -19,5 +19,5 @@
   },
   "postCreateCommand": "composer install --no-interaction",
   "remoteUser": "root",
-  "forwardPorts": [9000, 9001, 3306, 6379]
+  "forwardPorts": [8080, 8888, 3306, 6379]
 }
