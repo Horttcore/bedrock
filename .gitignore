@@ -19,6 +19,7 @@ web/.htaccess
 .env
 .env.*
 !.env.example
+!.devcontainer/.env
 
 # Composer
 /vendor

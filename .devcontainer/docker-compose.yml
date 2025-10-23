@@ -4,48 +4,46 @@ services:
         build:
             context: ..
             dockerfile: .devcontainer/Dockerfile
-        container_name: bedrock_web
+        container_name: app_web
         restart: unless-stopped
         env_file:
             - .env
         ports:
-            - "${PUBLIC_HTTP_PORT:-8080}:80"
             - "${PUBLIC_HTTPS_PORT:-8888}:443"
         volumes:
             - ..:/app
         working_dir: /app
         environment:
-            - SERVER_NAME=:80
             - WP_CLI_ALLOW_ROOT=1
         command: ["frankenphp", "run", "--config", "/etc/caddy/Caddyfile"]
         depends_on:
             - mysql
             - valkey
         networks:
-            - bedrock-network
+            - app-network
 
     # MySQL Database
     mysql:
         image: mysql:8.0
-        container_name: bedrock_mysql
+        container_name: app_mysql
         restart: unless-stopped
         ports:
             - "${PUBLIC_MYSQL_PORT:-3306}:3306"
         environment:
             MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: bedrock
-            MYSQL_USER: bedrock
-            MYSQL_PASSWORD: bedrock
+            MYSQL_DATABASE: app
+            MYSQL_USER: app
+            MYSQL_PASSWORD: app
         volumes:
             - mysql_data:/var/lib/mysql
             - ./config/init.sql:/docker-entrypoint-initdb.d/init.sql
         networks:
-            - bedrock-network
+            - app-network
 
     # Valkey for caching (Redis-compatible)
     valkey:
         image: valkey/valkey:8.0-alpine
-        container_name: bedrock_valkey
+        container_name: app_valkey
         restart: unless-stopped
         ports:
             - "${PUBLIC_VALKEY_PORT:-6379}:6379"
@@ -53,7 +51,7 @@ services:
             - valkey_data:/data
         command: valkey-server --appendonly yes
         networks:
-            - bedrock-network
+            - app-network
 
 volumes:
     mysql_data:
@@ -62,5 +60,5 @@ volumes:
         driver: local
 
 networks:
-    bedrock-network:
+    app-network:
         driver: bridge

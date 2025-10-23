@@ -1,15 +1,15 @@
 -- MySQL initialization script for WordPress Bedrock
 -- This script runs when the MySQL container starts for the first time
 
--- Ensure the bedrock database exists
-CREATE DATABASE IF NOT EXISTS `bedrock` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+-- Ensure the app database exists
+CREATE DATABASE IF NOT EXISTS `app` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
--- Grant all privileges to bedrock user
-GRANT ALL PRIVILEGES ON `bedrock`.* TO 'bedrock'@'%';
+-- Grant all privileges to app user
+GRANT ALL PRIVILEGES ON `app`.* TO 'app'@'%';
 FLUSH PRIVILEGES;
 
 -- Optional: Create additional databases for testing/staging
-CREATE DATABASE IF NOT EXISTS `bedrock_test` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-GRANT ALL PRIVILEGES ON `bedrock_test`.* TO 'bedrock'@'%';
+CREATE DATABASE IF NOT EXISTS `app_test` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+GRANT ALL PRIVILEGES ON `app_test`.* TO 'app'@'%';
 
 FLUSH PRIVILEGES;
