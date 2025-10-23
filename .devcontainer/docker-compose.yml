@@ -17,6 +17,7 @@ services:
         environment:
             - SERVER_NAME=:80
             - WP_CLI_ALLOW_ROOT=1
+        command: ["frankenphp", "run", "--config", "/etc/caddy/Caddyfile"]
         depends_on:
             - mysql
             - valkey
