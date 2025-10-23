@@ -1,6 +1,7 @@
 {
 	frankenphp
 	order php_server before file_server
+	local_certs
 }
 
 localhost:80 {
@@ -12,6 +13,6 @@ localhost:443 {
 	root * /app/web
 	php_server
 	tls internal {
-		protocols tls1.2 tls1.3
+		on_demand
 	}
 }

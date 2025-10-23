@@ -60,6 +60,9 @@ WORKDIR /app
 # Copy custom PHP configuration
 COPY .devcontainer/config/php.ini /usr/local/etc/php/conf.d/custom.ini
 
+# Copy Caddyfile
+COPY .devcontainer/config/Caddyfile /etc/caddy/Caddyfile
+
 # Expose ports
 EXPOSE 80 443
 

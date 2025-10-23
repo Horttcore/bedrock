@@ -37,7 +37,7 @@ services:
             MYSQL_PASSWORD: bedrock
         volumes:
             - mysql_data:/var/lib/mysql
-            - ../docker/mysql/init.sql:/docker-entrypoint-initdb.d
+            - ./config/init.sql:/docker-entrypoint-initdb.d/init.sql
         networks:
             - bedrock-network
 
