@@ -1,9 +1,9 @@
 {
-  "name": "roots/bedrock",
+  "name": "ralfhortt/bedrock",
   "type": "project",
   "license": "MIT",
   "description": "WordPress boilerplate with Composer, easier configuration, and an improved folder structure",
-  "homepage": "https://roots.io/bedrock/",
+  "homepage": "https://github.com/Horttcore/bedrock",
   "authors": [
     {
       "name": "Scott Walkinshaw",
@@ -14,14 +14,18 @@
       "name": "Ben Word",
       "email": "ben@benword.com",
       "homepage": "https://github.com/retlehs"
+    },
+    {
+      "name": "Ralf Hortt",
+      "email": "mail@ralfhortt.dev",
+      "homepage": "https://ralfhortt.dev"
     }
   ],
   "keywords": [
     "bedrock", "composer", "roots", "wordpress", "wp", "wp-config"
   ],
   "support": {
-    "issues": "https://github.com/roots/bedrock/issues",
-    "forum": "https://discourse.roots.io/category/bedrock"
+    "issues": "https://github.com/horttcore/bedrock/issues"
   },
   "repositories": [
     {
@@ -31,7 +35,7 @@
     }
   ],
   "require": {
-    "php": ">=8.1",
+    "php": ">=8.3",
     "composer/installers": "^2.2",
     "vlucas/phpdotenv": "^5.5",
     "oscarotero/env": "^2.1",
