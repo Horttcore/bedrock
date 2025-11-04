@@ -48,14 +48,20 @@
   "require-dev": {
     "roave/security-advisories": "dev-latest",
     "laravel/pint": "^1.18",
-    "spatie/ignition": "^1.15"
+    "spatie/ignition": "^1.15",
+    "rector/rector": "^2.2",
+    "phpstan/phpstan": "^2.1",
+    "szepeviktor/phpstan-wordpress": "^2.0",
+    "phpstan/extension-installer": "^1.4",
+    "phpstan/phpstan-deprecation-rules": "^2.0"
   },
   "config": {
     "optimize-autoloader": true,
     "preferred-install": "dist",
     "allow-plugins": {
       "composer/installers": true,
-      "roots/wordpress-core-installer": true
+      "roots/wordpress-core-installer": true,
+      "phpstan/extension-installer": true
     }
   },
   "minimum-stability": "dev",
@@ -72,7 +78,8 @@
     "docker:up": "docker-compose -f .devcontainer/docker-compose.yml --project-name bedrock-dev up -d --build",
     "docker:down": "docker-compose -f .devcontainer/docker-compose.yml --project-name bedrock-dev down",
     "docker:drop": "docker-compose -f .devcontainer/docker-compose.yml --project-name bedrock-dev down -v",
-    "lint": "pint --test",
-    "lint:fix": "pint"
+    "phpstan": "phpstan analyse --memory-limit=2048M",
+    "format": "pint --test",
+    "format:fix": "pint"
   }
 }

@@ -1,0 +1,6 @@
+parameters:
+  level: max
+  paths:
+    - web/app/themes/twentytwentyfive/
+  scanFiles:
+    - vendor/php-stubs/wordpress-stubs/wordpress-stubs.php
