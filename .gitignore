@@ -5,6 +5,8 @@ web/app/mu-plugins/*/
 web/app/themes/twentytwentyfive/
 web/app/upgrade
 web/app/uploads/*
+web/app/languages/*
+!web/app/languages/.gitkeep
 !web/app/uploads/.gitkeep
 web/app/cache/*
 
