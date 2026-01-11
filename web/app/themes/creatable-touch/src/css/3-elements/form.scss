@@ -1,0 +1,34 @@
+/**
+ * Input
+ */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/**
+ * Input options
+ */
+input[type="checkbox"],
+input[type="radio"] {
+    width: auto;
+}
+
+/**
+ * Submit button
+ */
+button[type="submit"],
+input[type="submit"] {
+    @extend %button--primary !optional;
+}
+
+/**
+ * Textarea
+ */
+textarea {
+    resize: vertical;
+}

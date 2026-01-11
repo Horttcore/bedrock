@@ -43,7 +43,11 @@
     "roots/bedrock-disallow-indexing": "^2.0",
     "roots/wordpress": "6.8.3",
     "roots/wp-config": "1.0.0",
-    "wpackagist-theme/twentytwentyfive": "^1.0"
+    "wpackagist-theme/twentytwentyfive": "^1.0",
+    "wpackagist-plugin/statify": "^1.8",
+    "ralfhortt/wp-maybe-remove-comments": "^1.4",
+    "ralfhortt/wp-maybe-remove-posts": "dev-main",
+    "wpackagist-plugin/view-transitions": "^1.1"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",

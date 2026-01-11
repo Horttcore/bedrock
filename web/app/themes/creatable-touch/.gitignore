@@ -1,0 +1,9 @@
+.DS_Store
+.env
+build
+node_modules
+vendor
+theme.json
+styles/*
+!styles/README.md
+theme.json
